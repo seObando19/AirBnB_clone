@@ -6,8 +6,14 @@ from datetime import datetime, date, time
 class BaseModel:
     '''Base Model class for the proyect'''
     def __init__(self, *args, **kwargs):
-        dt = datetime.now()
-
+        dt = datetime.now() ###bro, apenas lo implemento, tenemos que ver que si podamos organizar bien el datetime, si falla ebemos condicionarlo
+        if kwargs:
+        for k, v in kwargs.items():
+            if k == '__class__':
+                continue
+                else:
+                    setattr(self, k, v)
+                    ### tal vez poner un else aca, y un if antes d el for
         self.id = str(uuid4())
         """
         dt.strftime("%Y-%m-%dT%H:%M:%S.%f")
