@@ -17,7 +17,6 @@ def time_conversor(obj):
 class BaseModel:
     '''Base Model class for the proyect'''
     def __init__(self, *args, **kwargs):
-    ###bro, apenas lo implemento, tenemos que ver que si podamos organizar bien el datetime, si falla ebemos condicionarlo
         if kwargs:
             self.created_at = time_conversor(kwargs["created_at"])
             self.updated_at = time_conversor(kwargs["updated_at"])
@@ -26,7 +25,6 @@ class BaseModel:
                     continue
                 else:
                     setattr(self, k, v)
-                    ### tal vez poner un else aca, y un if antes d el for
         else:
             self.id = str(uuid4())
             self.created_at = datetime.today().isoformat()
