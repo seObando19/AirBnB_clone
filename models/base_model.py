@@ -2,24 +2,27 @@
 '''this module is the base class for all other classes'''
 from uuid import uuid4
 from datetime import datetime, date, time
+import models
 
 class BaseModel:
     '''Base Model class for the proyect'''
     def __init__(self, *args, **kwargs):
         dt = datetime.now() ###bro, apenas lo implemento, tenemos que ver que si podamos organizar bien el datetime, si falla ebemos condicionarlo
         if kwargs:
-        for k, v in kwargs.items():
-            if k == '__class__':
-                continue
+            for k, v in kwargs.items():
+                if k == '__class__':
+                    continue
                 else:
                     setattr(self, k, v)
                     ### tal vez poner un else aca, y un if antes d el for
-        self.id = str(uuid4())
-        """
-        dt.strftime("%Y-%m-%dT%H:%M:%S.%f")
-        """
-        self.created_at = dt
-        self.updated_at = dt
+        else:
+            self.id = str(uuid4())
+            """
+            dt.strftime("%Y-%m-%dT%H:%M:%S.%f")
+            """
+            self.created_at = dt
+            self.updated_at = dt
+            models.storage.new(self)
 
     def __str__(self):
         ''''''
@@ -34,6 +37,7 @@ class BaseModel:
         dt = datetime.now()
 
         self.updated_at = dt
+        models.storage.save()
 
     def to_dict(self):
         '''
