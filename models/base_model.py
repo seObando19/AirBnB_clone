@@ -3,7 +3,7 @@
 Define  BaseModel class
 """
 from uuid import uuid4
-from datetime import datetime, date, time
+from datetime import datetime
 import models
 
 
@@ -33,9 +33,9 @@ class BaseModel:
         self.__dict__.update({
             "created_at": time_conversor(self.created_at),
             "updated_at": time_conversor(self.updated_at),
-            })
-        text = "[{}] ({}) {}"
-        return text.format(self.__class__.__name__, self.id, self.__dict__)
+        })
+        return "[{:s}] ({:s}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
