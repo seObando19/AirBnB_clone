@@ -30,6 +30,10 @@ class BaseModel:
         """
            String representation of BaseModel class
         """
+        self.__dict__.update({
+            "created_at": time_conversor(self.created_at),
+            "updated_at": time_conversor(self.updated_at),
+            })
         text = "[{}] ({}) {}"
         return text.format(self.__class__.__name__, self.id, self.__dict__)
 
