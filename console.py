@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(name) == 1:
             print("** instance id missing **")
-        elif key in models.storage.all():
+        elif key not in models.storage.all():
             print("** no instance found **")
         else:
             print(models.storage.all()[key])
