@@ -4,11 +4,23 @@ from uuid import uuid4
 from datetime import datetime, date, time
 import models
 
+
+def time_conversor(obj):
+    """ Define time conversor
+        that return new time object
+    """
+    if type(obj) in [datetime]:
+        obj = obj.strftime('%Y-%m-%dT%H:%M:%S.%f')
+    return datetime.strptime(obj, "%Y-%m-%dT%H:%M:%S.%f")
+
+
 class BaseModel:
     '''Base Model class for the proyect'''
     def __init__(self, *args, **kwargs):
-        dt = datetime.now() ###bro, apenas lo implemento, tenemos que ver que si podamos organizar bien el datetime, si falla ebemos condicionarlo
+    ###bro, apenas lo implemento, tenemos que ver que si podamos organizar bien el datetime, si falla ebemos condicionarlo
         if kwargs:
+            self.created_at = time_conversor(kwargs["created_at"])
+            self.updated_at = time_conversor(kwargs["updated_at"])
             for k, v in kwargs.items():
                 if k == '__class__':
                     continue
@@ -17,11 +29,8 @@ class BaseModel:
                     ### tal vez poner un else aca, y un if antes d el for
         else:
             self.id = str(uuid4())
-            """
-            dt.strftime("%Y-%m-%dT%H:%M:%S.%f")
-            """
-            self.created_at = dt
-            self.updated_at = dt
+            self.created_at = datetime.today().isoformat()
+            self.updated_at = datetime.today().isoformat()
             models.storage.new(self)
 
     def __str__(self):
@@ -34,9 +43,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         '''
-        dt = datetime.now()
-
-        self.updated_at = dt
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
@@ -44,11 +51,12 @@ class BaseModel:
         Returns a dictionary containing all keys/values of __dict__
         of the instance
         '''
-        self.__dict__.update(
-            {"updated_at" : self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")}
-            )
-        self.__dict__.update(
-            {"created_at" : self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")}
-        )
-        self.__dict__['__class__'] = self.__class__.__name__
-        return dict(self.__dict__)
+        if type(self.created_at) in [str]:
+            self.created_at = time_conversor(self.created_at)
+        if type(self.updated_at) in [str]:
+            self.updated_at = time_conversor(self.updated_at)
+        self.created_at = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        self.updated_at = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dictionary = (self.__dict__).copy()
+        dictionary['__class__'] = self.__class__.__name__
+        return dictionary

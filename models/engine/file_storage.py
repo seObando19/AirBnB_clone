@@ -4,6 +4,7 @@ from models.base_model import BaseModel
 import json
 import os
 
+
 class FileStorage:
     '''class for serialization and deserialization'''
     __file_path = "file.json" ##this have to be a string variable type
@@ -23,19 +24,20 @@ class FileStorage:
 
     def save(self):
         '''method save'''
-        __dic = {k: v.to_dict() for k, v in self.__objects.items()}
         with open(self.__file_path, mode="w", encoding="utf-8") as my_file:
+            __dic = {k: v.to_dict() for k, v in self.__objects.items()}
             ##Si no chequea bien hay que hacer sort al JSON
             json.dump(__dic, my_file, indent=4, default=str)
 
 
+                ##for k, v in __mydic.items():
+                  ##  print("{}".format(k))
+                    ##print("VALUE {}".format(v))
     def reload(self):
-        '''Reload method'''
+        '''Reload method''' 
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, mode="r", encoding="utf-8") as my_file:
                 dic_to_dic = json.load(my_file)
                 for val in dic_to_dic.values():
-                    val = '__class__'
-                    continue
-                else:
-
+                    clsName = val['__class__']
+                    self.new(eval(clsName)(**val))
