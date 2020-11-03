@@ -44,7 +44,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-
     def do_show(self, cls_name_id):
         """
         show - show Python object representation of json object
@@ -87,6 +86,27 @@ class HBNBCommand(cmd.Cmd):
             if key in dic:
                 del dic[key]
                 models.storage.save()
+
+    def do_update(self, arg):
+        argumentos = arg.split()
+        print("{}".format(models.storage.all()))
+        key = ".".join(argumentos[:2])
+        print(" PANA MIRAME ACA{}".format(key))
+        if not argumentos:
+            print("** class name missing **")
+        elif argumentos[0] not in globals():
+            print("** class doesn't exist **")
+        elif len(argumentos) < 2:
+            print("** instance id missing **")
+        elif ".".join(argumentos[:2]) not in models.storage.all():
+            print("** no instance found **")
+        elif len(argumentos) < 3:
+            print("** attribute name missing **")
+        elif len(argumentos) < 4:
+            print("** value missing **")
+        else:
+            key = ".".join(argumentos[:2])
+            print("{}".format(key))
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
