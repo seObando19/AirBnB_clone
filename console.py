@@ -31,6 +31,20 @@ class HBNBCommand(cmd.Cmd):
             print(new_operacion.id)
             new_operacion.save()
 
+    def do_all(self, cls_name):
+        """
+            Prints all string representation of all instances based
+            --------------------------------------------------------
+
+        @ usage - > <data> <model> {ex: all BaseModel}
+        """
+        if not cls_name or cls_name in globals():
+            for value in models.storage.all().values():
+                print([str(value)])
+        else:
+            print("** class doesn't exist **")
+
+
     def do_show(self, cls_name_id):
         """
         show - show Python object representation of json object
