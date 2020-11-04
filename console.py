@@ -88,10 +88,15 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
 
     def do_update(self, arg):
+        """
+        update - update a parameter´s value
+        -----------------------------------------------------
+
+        @ usage - > <data> <model> <attribute> <value>
+        {ex: update BaseModel 1223131424131 name MARCOS}
+        """
         argumentos = arg.split()
-        print("{}".format(models.storage.all()))
         key = ".".join(argumentos[:2])
-        print(" PANA MIRAME ACA{}".format(key))
         if not argumentos:
             print("** class name missing **")
         elif argumentos[0] not in globals():
@@ -106,7 +111,11 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             key = ".".join(argumentos[:2])
-            print("{}".format(key))
+            u_atributo = argumentos[2]
+            u_valor = argumentos[3]
+            _dict = models.storage.all()[key].__dict__
+            _dict[u_atributo] = u_valor
+            models.storage.save()
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
