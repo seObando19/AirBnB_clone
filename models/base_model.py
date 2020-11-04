@@ -12,6 +12,7 @@ class BaseModel:
         Base Model class for the proyect
     """
     def __init__(self, *args, **kwargs):
+        ''' initializes the class BaseModel '''
         if kwargs:
             self.created_at = time_conversor(kwargs["created_at"])
             self.updated_at = time_conversor(kwargs["updated_at"])
