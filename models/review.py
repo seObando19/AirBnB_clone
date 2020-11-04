@@ -4,8 +4,7 @@ class review
 """
 
 
-from models.base_model import BaseModel, time_conversor
-from datetime import datetime
+from models.base_model import BaseModel
 
 
 class Review(BaseModel):
