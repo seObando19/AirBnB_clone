@@ -22,13 +22,12 @@ class BaseModel:
                 if k == '__class__':
                     continue
                 else:
-                    '''setattr(self, k, v)'''
-                    self.__dict__[k] = v
+                    setattr(self, k, v)
             models.storage.new(self)
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = datetime.today().isoformat()
+            self.updated_at = datetime.today().isoformat()
             models.storage.new(self)
 
     def __str__(self):
@@ -55,11 +54,13 @@ class BaseModel:
             Returns a dictionary containing all keys/values of __dict__
             of the instance
         """
-        dictionary = (self.__dict__).copy()
         if type(self.created_at) in [str]:
-            dictionary["created_at"] = self.created_at.isoformat()
+            self.created_at = time_conversor(self.created_at)
         if type(self.updated_at) in [str]:
-            dictionary["updated_at"] = self.updated_at.isoformat()
+            self.updated_at = time_conversor(self.updated_at)
+        self.created_at = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        self.updated_at = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dictionary = (self.__dict__).copy()
         dictionary['__class__'] = self.__class__.__name__
         return dictionary
 
