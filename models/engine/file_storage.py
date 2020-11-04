@@ -42,7 +42,12 @@ class FileStorage:
         """
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, mode="r", encoding="utf-8") as my_file:
-                dic_to_dic = json.load(my_file)
-                for val in dic_to_dic.values():
-                    clsName = val['__class__']
-                    self.new(eval(clsName)(**val))
+                try:
+                    dic_to_dic = json.load(my_file)
+                    for val in dic_to_dic.values():
+                        clsName = val['__class__']
+                        self.new(eval(clsName)(**val))
+                except:
+                    pass
+        else:
+            return
