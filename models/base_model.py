@@ -13,8 +13,10 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         if kwargs:
-            self.created_at = time_conversor(kwargs["created_at"])
-            self.updated_at = time_conversor(kwargs["updated_at"])
+            if "created_at" in kwargs:
+                self.created_at = time_conversor(kwargs["created_at"])
+            if "updated_at" in kwargs:
+                self.updated_at = time_conversor(kwargs["updated_at"])
             for k, v in kwargs.items():
                 if k == '__class__':
                     continue
