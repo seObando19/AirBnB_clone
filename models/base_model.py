@@ -1,18 +1,35 @@
 #!/usr/bin/python3
 """
-Define  BaseModel class
+Define  BaseModel class for all other classess
 """
+
+
 from uuid import uuid4
 from datetime import datetime
 import models
 
 
+def time_conversor(obj):
+    """
+        Define time conversor
+        that return new time object
+    """
+
+    if type(obj) in [datetime]:
+        obj = obj.strftime('%Y-%m-%dT%H:%M:%S.%f')
+    return datetime.strptime(obj, "%Y-%m-%dT%H:%M:%S.%f")
+
+
 class BaseModel:
     """
-        Base Model class for the proyect
+        Base Model class for the proyect HBnB
     """
+
     def __init__(self, *args, **kwargs):
-        ''' initializes the class BaseModel '''
+        """ initializes the class BaseModel
+        with args
+        """
+
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at":
@@ -34,6 +51,7 @@ class BaseModel:
         """
            String representation of BaseModel class
         """
+
         self.__dict__.update({
             "created_at": time_conversor(self.created_at),
             "updated_at": time_conversor(self.updated_at),
@@ -46,6 +64,7 @@ class BaseModel:
             updates the public instance attribute updated_at
             with the current datetime
         """
+
         self.updated_at = datetime.today()
         models.storage.save()
 
@@ -54,6 +73,7 @@ class BaseModel:
             Returns a dictionary containing all keys/values of __dict__
             of the instance
         """
+
         if type(self.created_at) in [str]:
             self.created_at = time_conversor(self.created_at)
         if type(self.updated_at) in [str]:
@@ -63,13 +83,3 @@ class BaseModel:
         dictionary = (self.__dict__).copy()
         dictionary['__class__'] = self.__class__.__name__
         return dictionary
-
-
-def time_conversor(obj):
-    """
-        Define time conversor
-        that return new time object
-    """
-    if type(obj) in [datetime]:
-        obj = obj.strftime('%Y-%m-%dT%H:%M:%S.%f')
-    return datetime.strptime(obj, "%Y-%m-%dT%H:%M:%S.%f")

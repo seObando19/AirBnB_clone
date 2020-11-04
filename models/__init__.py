@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-method init
+method initialize for the proyect
 """
+
+
 from models.engine.file_storage import FileStorage
 
 

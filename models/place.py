@@ -1,12 +1,17 @@
 #!/usr/bin/python3
 """
-class place
+class place in the site qhere people is
+staying
 """
+
+
 from models.base_model import BaseModel
 
 
-class review(BaseModel):
-    """ review inherits from BaseModel """
+class Place(BaseModel):
+    """ place inherits from BaseModel and refers to the site where
+    people is staying"""
+
     city_id = ""
     user_id = ""
     name = ""
