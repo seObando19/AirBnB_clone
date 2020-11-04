@@ -54,9 +54,9 @@ class FileStorage:
         """
         try:
             if os.path.isfile(self.__file_path):
-                with open(self.__file_path, encoding="utf-8") as my_file:
+                with open(self.__file_path, mode="r", encoding="utf-8") as mfy:
                     try:
-                        dic_to_dic = json.load(my_file)
+                        dic_to_dic = json.load(mfy)
                         for val in dic_to_dic.values():
                             clsName = val['__class__']
                             self.new(eval(clsName)(**val))
