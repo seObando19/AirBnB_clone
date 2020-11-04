@@ -14,17 +14,21 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         ''' initializes the class BaseModel '''
         if kwargs:
-            self.created_at = time_conversor(kwargs["created_at"])
-            self.updated_at = time_conversor(kwargs["updated_at"])
             for k, v in kwargs.items():
+                if k == "created_at":
+                    self.created_at = time_conversor(kwargs["created_at"])
+                if k == "updated_at":
+                    self.updated_at = time_conversor(kwargs["updated_at"])
                 if k == '__class__':
                     continue
                 else:
-                    setattr(self, k, v)
+                    '''setattr(self, k, v)'''
+                    self.__dict__[k] = v
+            models.storage.new(self)
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.today().isoformat()
-            self.updated_at = datetime.today().isoformat()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
@@ -51,13 +55,11 @@ class BaseModel:
             Returns a dictionary containing all keys/values of __dict__
             of the instance
         """
-        if type(self.created_at) in [str]:
-            self.created_at = time_conversor(self.created_at)
-        if type(self.updated_at) in [str]:
-            self.updated_at = time_conversor(self.updated_at)
-        self.created_at = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        self.updated_at = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         dictionary = (self.__dict__).copy()
+        if type(self.created_at) in [str]:
+            dictionary["created_at"] = self.created_at.isoformat()
+        if type(self.updated_at) in [str]:
+            dictionary["updated_at"] = self.updated_at.isoformat()
         dictionary['__class__'] = self.__class__.__name__
         return dictionary
 
