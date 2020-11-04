@@ -32,10 +32,6 @@ class BaseModel:
         """
            String representation of BaseModel class
         """
-        self.__dict__.update({
-            "created_at": time_conversor(self.created_at),
-            "updated_at": time_conversor(self.updated_at),
-        })
         return "[{:s}] ({:s}) {}".format(
             self.__class__.__name__, self.id, self.__dict__)
 
@@ -44,7 +40,7 @@ class BaseModel:
             updates the public instance attribute updated_at
             with the current datetime
         """
-        self.updated_at = datetime.today()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
@@ -52,13 +48,11 @@ class BaseModel:
             Returns a dictionary containing all keys/values of __dict__
             of the instance
         """
-        if type(self.created_at) in [str]:
-            self.created_at = time_conversor(self.created_at)
-        if type(self.updated_at) in [str]:
-            self.updated_at = time_conversor(self.updated_at)
-        self.created_at = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        self.updated_at = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         dictionary = (self.__dict__).copy()
+        if "created_at" in dictionary:
+            self.created_at = time_conversor(self.created_at)
+        if "updated_at" in dictionary:
+            self.updated_at = time_conversor(self.updated_at)
         dictionary['__class__'] = self.__class__.__name__
         return dictionary
 
