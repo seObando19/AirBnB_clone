@@ -1,9 +1,4 @@
 #!/usr/bin/python3
-"""
-module used to store data
-"""
-
-
 from models.base_model import BaseModel
 import json
 import os
@@ -13,15 +8,21 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+"""
+module used to store data
+"""
 
 
 class FileStorage:
     """
         class for serialization and deserialization of classes
     """
-
-    __file_path = "file.json"
-    __objects = {}
+    def __init__(self):
+        """
+        __init__ init the constructor
+        """
+        self.__file_path = "file.json"
+        self.__objects = dict()
 
     def all(self):
         """
