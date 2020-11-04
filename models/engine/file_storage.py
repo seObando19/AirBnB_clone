@@ -5,6 +5,7 @@ module used to store data
 from models.base_model import BaseModel
 import json
 import os
+from models.user import User
 
 
 class FileStorage:

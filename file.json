@@ -1,0 +1,52 @@
+{
+    "BaseModel.66cc1931-766b-4377-8a80-155262d13094": {
+        "__class__": "BaseModel",
+        "created_at": "2020-11-03T19:28:42.775132",
+        "id": "66cc1931-766b-4377-8a80-155262d13094",
+        "updated_at": "2020-11-03T19:28:42.775223"
+    },
+    "BaseModel.6b232d8f-cd39-4391-a7d0-5f3b99926501": {
+        "__class__": "BaseModel",
+        "created_at": "2020-11-03T19:22:03.199685",
+        "id": "6b232d8f-cd39-4391-a7d0-5f3b99926501",
+        "updated_at": "2020-11-03T19:22:03.199764"
+    },
+    "BaseModel.ac428ca5-da2f-4785-ae74-c8e8ded4d189": {
+        "__class__": "BaseModel",
+        "created_at": "2020-11-03T19:28:43.859956",
+        "id": "ac428ca5-da2f-4785-ae74-c8e8ded4d189",
+        "updated_at": "2020-11-03T19:28:43.860034"
+    },
+    "BaseModel.cd9c92b1-173d-4cbc-a977-38e5841464dc": {
+        "__class__": "BaseModel",
+        "created_at": "2020-11-03T19:28:45.128129",
+        "id": "cd9c92b1-173d-4cbc-a977-38e5841464dc",
+        "updated_at": "2020-11-03T19:28:45.128195"
+    },
+    "BaseModel.ce06dd1f-e98d-4609-a579-3d40ea041e9f": {
+        "__class__": "BaseModel",
+        "created_at": "2020-11-03T19:28:44.550682",
+        "id": "ce06dd1f-e98d-4609-a579-3d40ea041e9f",
+        "name": "HOLBERTONMIHIJO",
+        "updated_at": "2020-11-03T19:28:44.550825"
+    },
+    "User.558e11fc-b727-4a99-8fda-31b64791c323": {
+        "__class__": "User",
+        "created_at": "2020-11-03T20:40:01.564934",
+        "email": "airbnb2@holbertonshool.com",
+        "first_name": "John",
+        "id": "558e11fc-b727-4a99-8fda-31b64791c323",
+        "password": "root",
+        "updated_at": "2020-11-03T20:40:01.564955"
+    },
+    "User.55d3ba73-138e-4da0-9248-4b630f85a6c8": {
+        "__class__": "User",
+        "created_at": "2020-11-03T20:40:01.563942",
+        "email": "airbnb@holbertonshool.com",
+        "first_name": "Betty",
+        "id": "55d3ba73-138e-4da0-9248-4b630f85a6c8",
+        "last_name": "Holberton",
+        "password": "root",
+        "updated_at": "2020-11-03T20:40:01.563980"
+    }
+}
