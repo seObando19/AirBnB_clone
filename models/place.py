@@ -4,6 +4,7 @@ class place
 """
 from models.base_model import BaseModel
 
+
 class review(BaseModel):
     """ review inherits from BaseModel """
     city_id = ""

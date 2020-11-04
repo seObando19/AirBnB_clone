@@ -47,7 +47,7 @@ class FileStorage:
                     for val in dic_to_dic.values():
                         clsName = val['__class__']
                         self.new(eval(clsName)(**val))
-                except:
+                except NoHayArchivo:
                     pass
         else:
             return
