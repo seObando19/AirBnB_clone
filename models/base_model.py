@@ -14,14 +14,13 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         if kwargs:
             if "created_at" in kwargs:
-                self.created_at = time_conversor(kwargs["created_at"])
+                kwargs["created_at"] = time_conversor(kwargs["created_at"])
             if "updated_at" in kwargs:
-                self.updated_at = time_conversor(kwargs["updated_at"])
-            for k, v in kwargs.items():
-                if k == '__class__':
+                kwargs["updated_at"] = time_conversor(kwargs["updated_at"])
+            for key in kwargs.keys():
+                if key is '__class__':
                     continue
-                else:
-                    setattr(self, k, v)
+                    (self.__dict__)[key] = kwargs[key]
         else:
             self.id = str(uuid4())
             self.created_at = datetime.today().isoformat()
