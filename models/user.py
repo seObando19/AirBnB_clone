@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """user class for those that uses the app
 """
-
-
 from models.base_model import BaseModel
 
 
