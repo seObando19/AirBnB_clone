@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         lista_arg = line.split('.')
         method1 = "all()"
         method2 = "count()"
-        method3 = "llaves("
+        method3 = "show("
         method4 = "destroy("
         auxiliar_f = lista_arg[1]
         auxiliar_f = auxiliar_f.split("\"")
