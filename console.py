@@ -6,6 +6,7 @@
     - Andres Hurtado - github: @hurtadojara
     - Sebastian Obando - Github: @
 """
+import re
 import cmd
 import models
 from models.base_model import BaseModel
@@ -22,9 +23,13 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def default(self, line):
-        lista_arg = line.split(".")
+        lista_arg = line.split('.')
         method1 = "all()"
         method2 = "count()"
+        method3 = "llaves("
+        method4 = "destroy("
+        auxiliar_f = lista_arg[1]
+        auxiliar_f = auxiliar_f.split("\"")
         try:
             if lista_arg[1] == method1:
                 self.do_all(lista_arg[0])
@@ -33,6 +38,18 @@ class HBNBCommand(cmd.Cmd):
         try:
             if lista_arg[1] == method2:
                 self.do_count(lista_arg[0])
+        except Exception:
+            pass
+        try:
+            if auxiliar_f[0] == method3:
+                llaves = lista_arg[0] + " " + auxiliar_f[1]
+                self.do_show(llaves)
+        except Exception:
+            pass
+        try:
+            if auxiliar_f[0] == method4:
+                llaves = lista_arg[0] + " " + auxiliar_f[1]
+                self.do_destroy(llaves)
         except Exception:
             pass
 
@@ -67,10 +84,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, cls_name_id):
         """
-        show - show Python object representation of json object
+        llaves - llaves Python object representation of json object
         -----------------------------------------------------
 
-        @ usage - > <data> <model> <id> {ex: show BaseModel 123asd1272bn28dn}
+        @ usage - > <data> <model> <id> {ex: llaves BaseModel 123asd1272bn28dn}
         """
         name = cls_name_id.split()
         key = ".".join(name)
