@@ -21,6 +21,21 @@ class HBNBCommand(cmd.Cmd):
     '''Console the Airbnb project'''
     prompt = "(hbnb) "
 
+    def default(self, line):
+        lista_arg = line.split(".")
+        method1 = "all()"
+        method2 = "count()"
+        try:
+            if lista_arg[1] == method1:
+                self.do_all(lista_arg[0])
+        except Exception:
+            pass
+        try:
+            if lista_arg[1] == method2:
+                self.do_count(lista_arg[0])
+        except Exception:
+            pass
+
     def do_create(self, cls_name):
         """
         Create - Create new model from a class
@@ -135,6 +150,17 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Deactivate emptyline method from super class."""
         pass
+
+    def do_count(self, cls_name):
+        """e"""
+        try:
+            count = 0
+            for k, _ in (models.storage.all()).items():
+                if cls_name in k:
+                    count += 1
+            print(count)
+        except Exception:
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
