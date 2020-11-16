@@ -68,7 +68,7 @@ li
 	width: 251px;
 	display: none;
 }
-.locations:hover .popover
+ .locations:hover .popover
 {
 	display: block;
 }
